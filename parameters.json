@@ -1,0 +1,9 @@
+{
+    "engine": "text-davinci-003",
+    "temp": 0.7,
+    "top_p": 1.0,
+    "tokens": 200,
+    "freq_pen": 0.25,
+    "pres_pen": 0.05,
+    "stop": ["Bosworth: ","User: "]
+}
