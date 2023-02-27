@@ -46,21 +46,8 @@ def gpt3_completion(prompt, parameters_file='parameters.json'):
     pres_pen = parameters.get('pres_pen')
     stop = parameters.get('stop', ['Bosworth:', 'User: '])
     
-    # Check if the user's input contains a question about Wikidata
-    wikidata_keywords = ['search', 'search']
-    for keyword in wikidata_keywords:
-        if keyword in prompt.lower():
-            search_query = prompt.lower().split(keyword)[1].strip()
-            results = openai.api_request("search", {"model": "davinci", "query": search_query, "documents": [], "max_rerank": 0})
-            if len(results['data']) > 0:
-                entity = results['data'][0]
-                description = entity['object']
-                response = f"{description}"
-                break
-              
-    else:
-        # Calls the create() method of the Completion class to generate a response
-        response = openai.Completion.create(
+    # Calls the create() method of the Completion class to generate a response
+    response = openai.Completion.create(
             engine=engine,
             prompt=prompt,
             temperature=temp,
@@ -69,11 +56,11 @@ def gpt3_completion(prompt, parameters_file='parameters.json'):
             frequency_penalty=freq_pen,
             presence_penalty=pres_pen,
             stop=stop)
-        # Extracts the generated response from the response object and returns it as a string
-        response = response['choices'][0]['text'].strip()
+    # Extracts the generated response from the response object and returns it as a string
+    response = response['choices'][0]['text'].strip()
     return response
 
-
+  
 # This block of code is only executed if the script is run directly (not imported as a module)
 if __name__ == '__main__':
     # Initializes an empty list to store the conversation
